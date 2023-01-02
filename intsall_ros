@@ -1,0 +1,62 @@
+
+1.
+sudo sh -c '. /etc/lsb-release && echo "deb http://mirrors.ustc.edu.cn/ros/ubuntu/ $DISTRIB_CODENAME main" > /etc/apt/sources.list.d/ros-latest.list'
+
+2.设置密钥
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
+
+3.
+sudo apt-get update
+sudo apt-get install ros-melodic-desktop-full
+sudo apt-get install ros-melodic-rqt*
+
+4.
+sudo rosdep init
+rosdep update
+
+5.wget http://fishros.com/install -O fishros && . fishros
+
+6. 安装rosinstall
+sudo apt-get install python-rosinstall
+
+7.
+
+source /opt/ros/melodic/setup.bash
+
+8.
+mkdir -p ~/catkin_ws/src
+ 
+cd ~/catkin_ws/src
+ 
+catkin_init_workspace
+
+9.
+cd ~/catkin_ws/
+ 
+catkin_make
+
+10.
+
+sudo apt install net-tools
+gedit ~/.bashrc
+
+11.
+# Set ROS melodic
+source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+ 
+# Set ROS Network
+#ifconfig查看你的电脑ip地址
+export ROS_HOSTNAME=192.168.89.135
+export ROS_MASTER_URI=http://${ROS_HOSTNAME}:11311
+ 
+# Set ROS alias command 快捷指令
+alias cw='cd ~/catkin_ws'
+alias cs='cd ~/catkin_ws/src'
+alias cm='cd ~/catkin_ws && catkin_make'
+
+12.
+roscore
+rosrun turtlesim turtlesim_node
+rosrun turtlesim turtle_teleop_key
+
